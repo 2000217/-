@@ -6,3 +6,34 @@ precision = precision_score(y_true, y_pred)
 print("精确率（Precision）计算结果：")
 print(f"精确率 = {precision:.4f}")
 print("含义：预测为正类的样本中，实际为正类的比例")
+
+import numpy as np
+from sklearn.metrics import recall_score
+y_true = np.array([1, 0, 1, 1, 0, 1, 0, 0, 1, 0])  
+y_pred = np.array([1, 0, 1, 0, 0, 1, 1, 0, 1, 0]) 
+recall = recall_score(y_true, y_pred)
+print("召回率（Recall）计算结果：")
+print(f"召回率 = {recall:.4f}")
+print("含义：实际为正类的样本中，被正确预测为正类的比例")
+
+
+import numpy as np
+from sklearn.metrics import fbeta_score
+y_true = np.array([1, 0, 1, 1, 0, 1, 0, 0, 1, 0])  
+y_pred = np.array([1, 0, 1, 0, 0, 1, 1, 0, 1, 0]) 
+# 2. 计算F1分数（β=1，平衡精确率和召回率）
+beta = 1
+f1_score = fbeta_score(y_true, y_pred, beta=beta)
+print(f"F{beta}分数计算结果：")
+print(f"F{beta}分数 = {f1_score:.4f}")
+print("含义：精确率和召回率的调和平均，综合两者表现")
+
+# AUC计算
+import numpy as np
+from sklearn.metrics import roc_auc_score
+y_true = np.array([1, 0, 1, 1, 0, 1, 0, 0, 1, 0])  
+y_pred_proba = np.array([0.8, 0.3, 0.9, 0.6, 0.2, 0.7, 0.5, 0.1, 0.85, 0.25])
+auc = roc_auc_score(y_true, y_pred_proba)
+print("AUC计算结果：")
+print(f"AUC = {auc:.4f}")
+print("含义：ROC曲线下面积，衡量模型区分正负类的能力（越接近1越好）")
